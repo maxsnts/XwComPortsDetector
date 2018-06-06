@@ -39,6 +39,7 @@
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonHideMainWindow = new System.Windows.Forms.Button();
             this.checkAutoStart = new System.Windows.Forms.CheckBox();
+            this.btnGuessWork = new System.Windows.Forms.Button();
             this.appTrayMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,7 +50,7 @@
             this.btnShowComPorts.Name = "btnShowComPorts";
             this.btnShowComPorts.Size = new System.Drawing.Size(394, 31);
             this.btnShowComPorts.TabIndex = 0;
-            this.btnShowComPorts.Text = "Show COM ports now";
+            this.btnShowComPorts.Text = "Show COM ports notification now";
             this.btnShowComPorts.UseVisualStyleBackColor = true;
             this.btnShowComPorts.Click += new System.EventHandler(this.btnShowComPorts_Click);
             // 
@@ -69,7 +70,7 @@
             this.showMainApplicationWindowToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.appTrayMenu.Name = "appTrayMenu";
-            this.appTrayMenu.Size = new System.Drawing.Size(241, 92);
+            this.appTrayMenu.Size = new System.Drawing.Size(241, 70);
             // 
             // showCOMPortsNowToolStripMenuItem
             // 
@@ -94,7 +95,7 @@
             // 
             // buttonExit
             // 
-            this.buttonExit.Location = new System.Drawing.Point(6, 139);
+            this.buttonExit.Location = new System.Drawing.Point(6, 160);
             this.buttonExit.Margin = new System.Windows.Forms.Padding(2);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(394, 31);
@@ -105,12 +106,12 @@
             // 
             // buttonHideMainWindow
             // 
-            this.buttonHideMainWindow.Location = new System.Drawing.Point(6, 91);
+            this.buttonHideMainWindow.Location = new System.Drawing.Point(6, 125);
             this.buttonHideMainWindow.Margin = new System.Windows.Forms.Padding(2);
             this.buttonHideMainWindow.Name = "buttonHideMainWindow";
             this.buttonHideMainWindow.Size = new System.Drawing.Size(394, 31);
             this.buttonHideMainWindow.TabIndex = 3;
-            this.buttonHideMainWindow.Text = "Hide this window";
+            this.buttonHideMainWindow.Text = "Hide/Minimize to tray this window";
             this.buttonHideMainWindow.UseVisualStyleBackColor = true;
             this.buttonHideMainWindow.Click += new System.EventHandler(this.buttonHideMainWindow_Click);
             // 
@@ -125,11 +126,23 @@
             this.checkAutoStart.UseVisualStyleBackColor = true;
             this.checkAutoStart.CheckedChanged += new System.EventHandler(this.checkAutoStart_CheckedChanged);
             // 
+            // btnGuessWork
+            // 
+            this.btnGuessWork.Location = new System.Drawing.Point(6, 79);
+            this.btnGuessWork.Margin = new System.Windows.Forms.Padding(2);
+            this.btnGuessWork.Name = "btnGuessWork";
+            this.btnGuessWork.Size = new System.Drawing.Size(394, 31);
+            this.btnGuessWork.TabIndex = 5;
+            this.btnGuessWork.Text = "Try guess COM settings";
+            this.btnGuessWork.UseVisualStyleBackColor = true;
+            this.btnGuessWork.Click += new System.EventHandler(this.btnGuessWork_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(408, 177);
+            this.ClientSize = new System.Drawing.Size(408, 201);
+            this.Controls.Add(this.btnGuessWork);
             this.Controls.Add(this.checkAutoStart);
             this.Controls.Add(this.buttonHideMainWindow);
             this.Controls.Add(this.buttonExit);
@@ -161,6 +174,7 @@
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Button buttonHideMainWindow;
         private System.Windows.Forms.CheckBox checkAutoStart;
+        private System.Windows.Forms.Button btnGuessWork;
     }
 }
 

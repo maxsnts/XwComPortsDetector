@@ -199,5 +199,12 @@ namespace XwComPortDetector
             FH,
             SWP_NOACTIVATE);
         }
+
+        //****************************************************************************
+        private void btnGuessWork_Click(object sender, EventArgs e)
+        {
+            Guess guess = new Guess();
+            guess.ShowDialog();
+        }
     }
 }
