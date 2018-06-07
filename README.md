@@ -19,3 +19,8 @@ When a new COM Port is added to the machine...
 When a COM Port is removed from the machine...
 
 ![Disconnect Popup](/images/DisconnectPopup.png)
+
+
+Try to guess the settings of a COM port. 
+
+![Disconnect Popup](/images/Guesswork.png)
