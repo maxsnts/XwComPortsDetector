@@ -22,7 +22,7 @@ namespace XwComPortDetector
         }
 
         //********************************************************************************************
-        public void Log(string text, Color textColor)
+        public void Log(string text)
         {
             Invoke((Action)(() =>
             {
@@ -32,9 +32,6 @@ namespace XwComPortDetector
                     {
                         string str = text + "\r\n";
                         StatusBox.AppendText(str);
-                        StatusBox.Select(StatusBox.Text.Length - (str.Length - 1), str.Length);
-                        StatusBox.SelectionColor = textColor;
-                        StatusBox.Select(StatusBox.Text.Length, 0);
                         StatusBox.ScrollToCaret();
                     }
                     catch { }
@@ -49,14 +46,16 @@ namespace XwComPortDetector
         }
 
         //********************************************************************************************
+        private System.Object SerialIncoming = null;
         private void btnStart_Click(object sender, EventArgs e)
         {
+            StatusBox.Text = "";
             Task.Run(() =>
             {
                 string[] ports = SerialPort.GetPortNames();
                 foreach (string PortName in ports)
                 {
-                    Log($"---------------- Try port {PortName} ------------------", Color.Black);
+                    Log($"---------------- Try port {PortName} ------------------");
 
                     foreach (int databits in new[] { 8, 7, 6, 5 })
                     {
@@ -92,37 +91,49 @@ namespace XwComPortDetector
                                     if (speed == 115200 && !check115200.Checked) continue;
 
                                     Thread.Sleep(1000);
-                                    Log($"- - - - - - - - - - - - - - - - - - - - - - - - -", Color.Black);
+                                    Log($"- - - - - - - - - - - - - - - - - - - - - - - - -");
+                                    SerialIncoming = new Object();
                                     using (SerialPort port = new SerialPort(PortName, speed, parity, databits, stop))
                                     {
                                         try
                                         {
-                                            port.ReadTimeout = 500;
-                                            port.WriteTimeout = 500;
                                             port.Open();
-                                            Log($"Connected: {speed},{parity},8,{stop}", Color.Green);
-                                            port.Write(Environment.NewLine);
-                                            Thread.Sleep(100);
+                                            Log($"Connected: {speed},8,{parity},{stop}");
+                                            if (checkTestBySend.Checked)
+                                            { 
+                                                string test = textTest.Text;
+                                                test = test.Replace("\\n", "\n");
+                                                test = test.Replace("\\r", "\r");
+                                                test = test.Replace("\\t", "\t");
+                                                port.Write(test);
+                                            }
+                                            WaitForAData(10000);
                                             string data = port.ReadExisting().Trim();
+                                            data = data.Replace("\n", "\\n");
+                                            data = data.Replace("\r", "\\r");
+                                            data = data.Replace("\t", "\\t");
                                             if (data == "")
-                                                Log("No data", Color.Orange);
+                                                Log("NO DATA");
                                             else
-                                                Log(data, Color.Orange);
+                                            {
+                                                Log($"DATA: {data}");
+                                                Log("\r\n");
+                                            }
                                         }
                                         catch (Exception ex)
                                         {
                                             if (ex.Message.Contains("does not exists"))
                                             {
-                                                Log("Port not fount: skip to next Port", Color.Red);
+                                                Log("Port not fount: skip to next Port");
                                                 goto NextPort;
                                             }
                                             if (ex.Message.Contains("timeout"))
                                             {
-                                                Log("Timeout: skip to next setting", Color.Red);
+                                                Log("Timeout: skip to next setting");
                                                 continue;
                                             }
 
-                                            Log(ex.Message, Color.Red);
+                                            Log(ex.Message);
                                         }
                                         finally
                                         {
@@ -140,8 +151,30 @@ namespace XwComPortDetector
                     NextPort:;
                 }
 
-                Log("---------------------- Done! -----------------------", Color.Black);
+                Log("-------------------- Done! ----------------------");
             });
+        }
+
+        //********************************************************************************************
+        private void Proxy(Object unused1, SerialDataReceivedEventArgs unused2)
+        {
+            lock (SerialIncoming)
+            {
+                Monitor.Pulse(SerialIncoming);
+            }
+        }
+
+        //********************************************************************************************
+        public bool WaitForAData(int Timeout)
+        {
+            lock (SerialIncoming)
+            {
+                if (!Monitor.Wait(SerialIncoming, Timeout))
+                {
+                    return false;
+                }
+                return true;
+            }
         }
     }
 }

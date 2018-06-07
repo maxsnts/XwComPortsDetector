@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Guess));
-            this.StatusBox = new System.Windows.Forms.RichTextBox();
             this.btnStart = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.check1200 = new System.Windows.Forms.CheckBox();
@@ -55,29 +54,19 @@
             this.checkStop1 = new System.Windows.Forms.CheckBox();
             this.checkStop15 = new System.Windows.Forms.CheckBox();
             this.checkStop2 = new System.Windows.Forms.CheckBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.textTest = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.checkTestBySend = new System.Windows.Forms.CheckBox();
+            this.StatusBox = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // StatusBox
-            // 
-            this.StatusBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.StatusBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.StatusBox.DetectUrls = false;
-            this.StatusBox.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StatusBox.Location = new System.Drawing.Point(0, 173);
-            this.StatusBox.MaxLength = 0;
-            this.StatusBox.Name = "StatusBox";
-            this.StatusBox.ReadOnly = true;
-            this.StatusBox.Size = new System.Drawing.Size(713, 558);
-            this.StatusBox.TabIndex = 5;
-            this.StatusBox.Text = "";
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(626, 12);
+            this.btnStart.Location = new System.Drawing.Point(577, 12);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 63);
+            this.btnStart.Size = new System.Drawing.Size(124, 124);
             this.btnStart.TabIndex = 6;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -105,8 +94,6 @@
             // check2400
             // 
             this.check2400.AutoSize = true;
-            this.check2400.Checked = true;
-            this.check2400.CheckState = System.Windows.Forms.CheckState.Checked;
             this.check2400.Location = new System.Drawing.Point(132, 16);
             this.check2400.Name = "check2400";
             this.check2400.Size = new System.Drawing.Size(50, 17);
@@ -177,8 +164,6 @@
             // check4800
             // 
             this.check4800.AutoSize = true;
-            this.check4800.Checked = true;
-            this.check4800.CheckState = System.Windows.Forms.CheckState.Checked;
             this.check4800.Location = new System.Drawing.Point(188, 15);
             this.check4800.Name = "check4800";
             this.check4800.Size = new System.Drawing.Size(50, 17);
@@ -263,9 +248,9 @@
             this.checkParitySpace.AutoSize = true;
             this.checkParitySpace.Location = new System.Drawing.Point(304, 50);
             this.checkParitySpace.Name = "checkParitySpace";
-            this.checkParitySpace.Size = new System.Drawing.Size(52, 17);
+            this.checkParitySpace.Size = new System.Drawing.Size(57, 17);
             this.checkParitySpace.TabIndex = 23;
-            this.checkParitySpace.Text = "None";
+            this.checkParitySpace.Text = "Space";
             this.checkParitySpace.UseVisualStyleBackColor = true;
             // 
             // checkData7
@@ -339,11 +324,72 @@
             this.checkStop2.Text = "2";
             this.checkStop2.UseVisualStyleBackColor = true;
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(98, 151);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(84, 20);
+            this.numericUpDown1.TabIndex = 31;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            // 
+            // textTest
+            // 
+            this.textTest.Location = new System.Drawing.Point(386, 150);
+            this.textTest.Name = "textTest";
+            this.textTest.Size = new System.Drawing.Size(315, 20);
+            this.textTest.TabIndex = 32;
+            this.textTest.Text = "\\n";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 154);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(74, 13);
+            this.label5.TabIndex = 33;
+            this.label5.Text = "Read Timeout";
+            // 
+            // checkTestBySend
+            // 
+            this.checkTestBySend.AutoSize = true;
+            this.checkTestBySend.Location = new System.Drawing.Point(228, 152);
+            this.checkTestBySend.Name = "checkTestBySend";
+            this.checkTestBySend.Size = new System.Drawing.Size(152, 17);
+            this.checkTestBySend.TabIndex = 35;
+            this.checkTestBySend.Text = "Test by sending something";
+            this.checkTestBySend.UseVisualStyleBackColor = true;
+            // 
+            // StatusBox
+            // 
+            this.StatusBox.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StatusBox.Location = new System.Drawing.Point(8, 189);
+            this.StatusBox.MaxLength = 532767;
+            this.StatusBox.Multiline = true;
+            this.StatusBox.Name = "StatusBox";
+            this.StatusBox.ReadOnly = true;
+            this.StatusBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.StatusBox.Size = new System.Drawing.Size(693, 530);
+            this.StatusBox.TabIndex = 36;
+            // 
             // Guess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(713, 731);
+            this.Controls.Add(this.StatusBox);
+            this.Controls.Add(this.checkTestBySend);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.textTest);
+            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.checkStop2);
             this.Controls.Add(this.checkStop15);
             this.Controls.Add(this.checkStop1);
@@ -369,21 +415,19 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.check1200);
             this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.StatusBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Name = "Guess";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Guess Work";
             this.Load += new System.EventHandler(this.Guess_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.RichTextBox StatusBox;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox check1200;
@@ -409,5 +453,10 @@
         private System.Windows.Forms.CheckBox checkStop1;
         private System.Windows.Forms.CheckBox checkStop15;
         private System.Windows.Forms.CheckBox checkStop2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.TextBox textTest;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox checkTestBySend;
+        private System.Windows.Forms.TextBox StatusBox;
     }
 }
